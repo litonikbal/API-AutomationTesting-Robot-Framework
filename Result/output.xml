@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20230125 15:28:11.534" schemaversion="2" generator="Robot 4.1.3 (Python 2.7.18 on win32)">
+<suite source="C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\tests" id="s1" name="Tests">
+<suite source="C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\tests\Createsite_csv.robot" id="s1-s1" name="Createsite csv">
+<test id="s1-s1-t1" name="Create a Site from csv">
+<kw name="Create a Site from csv">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Create a Site from csv</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Create a Site from csv">
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${file_data}</var>
+<arg>resources/api/Testdata/data.csv</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230125 15:28:12.385" html="true" level="INFO">Getting file '&lt;a href="file://C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\data.csv"&gt;C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\data.csv&lt;/a&gt;'.</msg>
+<msg timestamp="20230125 15:28:12.385" level="INFO">${file_data} = is_reserved,FALSE
+php_version,7.0 
+wp_version,6.0 
+site_name,ikbaltesting
+</msg>
+<status status="PASS" endtime="20230125 15:28:12.385" starttime="20230125 15:28:12.385"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${files}</var>
+<arg>file=${file_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:12.385" level="INFO">${files} = {u'file': 'is_reserved,FALSE\r\nphp_version,7.0 \r\nwp_version,6.0 \r\nsite_name,ikbaltesting\r\n'}</msg>
+<status status="PASS" endtime="20230125 15:28:12.385" starttime="20230125 15:28:12.385"/>
+</kw>
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:12.400" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:12.400" starttime="20230125 15:28:12.385"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:12.400" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:12.400" starttime="20230125 15:28:12.400"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:12.400" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:12.400" starttime="20230125 15:28:12.400"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:12.400" starttime="20230125 15:28:12.385"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:12.400" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:12.400" starttime="20230125 15:28:12.400"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>files=${files}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:16.602" level="INFO">POST Request : url=https://app.instawp.io/api/v2/sites 
+ path_url=/api/v2/sites 
+ headers={'Content-Length': '218', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Content-Type': 'multipart/form-data; boundary=ca7cea65012c0eea6012fc7c9049b397', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body=--ca7cea65012c0eea6012fc7c9049b397
+Content-Disposition: form-data; name="file"; filename="file"
+
+is_reserved,FALSE
+php_version,7.0 
+wp_version,6.0 
+site_name,ikbaltesting
+
+--ca7cea65012c0eea6012fc7c9049b397--
+ 
+ </msg>
+<msg timestamp="20230125 15:28:16.602" level="INFO">POST Response : url=https://app.instawp.io/api/v2/sites 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '59', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":71,"teamActiveSiteDiskUsage":71}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=cKhe%2B5ASlhjkmXUnYAnVgCnZJAafGNgFGS5AxWigkwXXyiOnzmgN3sbr610KQOoVJM4s5BzVC6OUtl1LUNO4NHFvk%2Fw3GBhQqk14Veh%2BK28ksKz9xsFR3HpAN%2BuIP2mGHg%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:16 GMT', 'CF-RAY': '78f026302ef49a09-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Site installation work in completed, Your website is ready!","data":{"is_pool":true,"message":"Site installation work in completed, Your website is ready!","status":1,"wp_url":"https:\/\/h-invasion-ciga.instawp.xyz","wp_username":"cijizahixu7397","wp_password":"9OJ8g1RCkbrIdtV6aX23","id":123745,"s_hash":"$2y$10$th6jxpzZnJoZWtrLEdR8luoqI840QrdEqHSjDcJscvfEp\/oqzam56","token":null}} 
+ </msg>
+<msg timestamp="20230125 15:28:16.602" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:16.618" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.618" starttime="20230125 15:28:12.400"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:16.633" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.633" starttime="20230125 15:28:16.633"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:16.633" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.633" starttime="20230125 15:28:16.633"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.reason}</arg>
+<arg>OK</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:16.649" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.649" starttime="20230125 15:28:16.633"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:16.649" level="INFO">True</msg>
+<status status="PASS" endtime="20230125 15:28:16.649" starttime="20230125 15:28:16.649"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:16.664" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.664" starttime="20230125 15:28:16.649"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>Site installation work in completed, Your website is ready!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:16.664" starttime="20230125 15:28:16.664"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][id]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:16.664" level="INFO">123745</msg>
+<status status="PASS" endtime="20230125 15:28:16.664" starttime="20230125 15:28:16.664"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_id}</var>
+<arg>${response.json()}[data][id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.680" level="INFO">${site_id} = 123745</msg>
+<status status="PASS" endtime="20230125 15:28:16.680" starttime="20230125 15:28:16.664"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:16.680" level="INFO">${site_id} = 123745</msg>
+<status status="PASS" endtime="20230125 15:28:16.680" starttime="20230125 15:28:16.680"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:16.680" level="INFO">https://h-invasion-ciga.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:16.680" starttime="20230125 15:28:16.680"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_url}</var>
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.696" level="INFO">${site_url} = https://h-invasion-ciga.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:16.696" starttime="20230125 15:28:16.680"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_url}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:16.696" level="INFO">${site_url} = https://h-invasion-ciga.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:16.696" starttime="20230125 15:28:16.696"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_username}</var>
+<arg>${response.json()}[data][wp_username]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.696" level="INFO">${Site_username} = cijizahixu7397</msg>
+<status status="PASS" endtime="20230125 15:28:16.696" starttime="20230125 15:28:16.696"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_username}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:16.696" level="INFO">${Site_username} = cijizahixu7397</msg>
+<status status="PASS" endtime="20230125 15:28:16.696" starttime="20230125 15:28:16.696"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_password}</var>
+<arg>${response.json()}[data][wp_password]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.711" level="INFO">${Site_password} = 9OJ8g1RCkbrIdtV6aX23</msg>
+<status status="PASS" endtime="20230125 15:28:16.711" starttime="20230125 15:28:16.696"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_password}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:16.711" level="INFO">${Site_password} = 9OJ8g1RCkbrIdtV6aX23</msg>
+<status status="PASS" endtime="20230125 15:28:16.711" starttime="20230125 15:28:16.711"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pool_site_status}</var>
+<arg>${response.json()}[data][is_pool]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.711" level="INFO">${pool_site_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:16.711" starttime="20230125 15:28:16.711"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${pool_site_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:16.727" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:16.711"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:12.385"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:12.369"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:12.369"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:12.369"/>
+</test>
+<status status="PASS" endtime="20230125 15:28:16.727" starttime="20230125 15:28:11.643"/>
+</suite>
+<suite source="C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\tests\Sites_api_testcases.robot" id="s1-s2" name="Sites api testcases">
+<test id="s1-s2-t1" name="Create a Site">
+<kw name="Create a Site" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Create a Site</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Create a Site" library="api_keywords">
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${file_data}</var>
+<arg>C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api\\Testdata\\sitecreation.json</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230125 15:28:16.836" html="true" level="INFO">Getting file '&lt;a href="file://C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\sitecreation.json"&gt;C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\sitecreation.json&lt;/a&gt;'.</msg>
+<msg timestamp="20230125 15:28:16.852" level="INFO">${file_data} = {
+    "is_reserved":false,
+    "php_version":"7.4",
+    "site_name":"Testing",
+    "wp_version":"6.0"
+}</msg>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.836"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${files}</var>
+<arg>file=${file_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:16.852" level="INFO">${files} = {u'file': '{\r\n    "is_reserved":false,\r\n    "php_version":"7.4",\r\n    "site_name":"Testing",\r\n    "wp_version":"6.0"\r\n}'}</msg>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.852"/>
+</kw>
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:16.852" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.852"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:16.852" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.852"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:16.852" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.852"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:16.852" starttime="20230125 15:28:16.852"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:16.868" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:16.868" starttime="20230125 15:28:16.852"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>files=${files}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:18.711" level="INFO">POST Request : url=https://app.instawp.io/api/v2/sites 
+ path_url=/api/v2/sites 
+ headers={'Content-Length': '248', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Content-Type': 'multipart/form-data; boundary=6f07a02299aceefb427a4409f4058cf0', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body=--6f07a02299aceefb427a4409f4058cf0
+Content-Disposition: form-data; name="file"; filename="file"
+
+{
+    "is_reserved":false,
+    "php_version":"7.4",
+    "site_name":"Testing",
+    "wp_version":"6.0"
+}
+--6f07a02299aceefb427a4409f4058cf0--
+ 
+ </msg>
+<msg timestamp="20230125 15:28:18.711" level="INFO">POST Response : url=https://app.instawp.io/api/v2/sites 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '58', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=ySvyldexSYjdVC4itvejjRJAFg91sx34CG51aGOO87GtGYReq%2FlxXIpvgyUsAdCy3oo1Mr%2B5VMLDQMMjNIoVZ251XuQRbgqbpz2fK1gPM6uST78%2BLFGqBAXwvtxcWAYkBw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:18 GMT', 'CF-RAY': '78f026446ce9d6b6-CDG', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Site installation work in completed, Your website is ready!","data":{"is_pool":true,"message":"Site installation work in completed, Your website is ready!","status":1,"wp_url":"https:\/\/meunleashed-sese.instawp.xyz","wp_username":"nofexabubi5641","wp_password":"kifZyMA0PnNHsUQLthOY","id":123746,"s_hash":"$2y$10$0ZicuAgRFa9S853To706eORDp1jsS4wf8zjg2KPQPZMzjbcOwrw7u","token":null}} 
+ </msg>
+<msg timestamp="20230125 15:28:18.711" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:18.727" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.727" starttime="20230125 15:28:16.868"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:18.743" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.743" starttime="20230125 15:28:18.727"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:18.743" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.743" starttime="20230125 15:28:18.743"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.reason}</arg>
+<arg>OK</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:18.758" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.758" starttime="20230125 15:28:18.743"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:18.758" level="INFO">True</msg>
+<status status="PASS" endtime="20230125 15:28:18.758" starttime="20230125 15:28:18.758"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:18.774" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.774" starttime="20230125 15:28:18.758"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>Site installation work in completed, Your website is ready!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:18.774" starttime="20230125 15:28:18.774"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][id]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:18.774" level="INFO">123746</msg>
+<status status="PASS" endtime="20230125 15:28:18.774" starttime="20230125 15:28:18.774"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_id}</var>
+<arg>${response.json()}[data][id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.805" level="INFO">${site_id} = 123746</msg>
+<status status="PASS" endtime="20230125 15:28:18.805" starttime="20230125 15:28:18.774"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:18.805" level="INFO">${site_id} = 123746</msg>
+<status status="PASS" endtime="20230125 15:28:18.805" starttime="20230125 15:28:18.805"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:18.805" level="INFO">https://meunleashed-sese.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:18.805" starttime="20230125 15:28:18.805"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_url}</var>
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.821" level="INFO">${site_url} = https://meunleashed-sese.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:18.821" starttime="20230125 15:28:18.805"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_url}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:18.821" level="INFO">${site_url} = https://meunleashed-sese.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:18.821" starttime="20230125 15:28:18.821"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_username}</var>
+<arg>${response.json()}[data][wp_username]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.821" level="INFO">${Site_username} = nofexabubi5641</msg>
+<status status="PASS" endtime="20230125 15:28:18.821" starttime="20230125 15:28:18.821"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_username}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:18.836" level="INFO">${Site_username} = nofexabubi5641</msg>
+<status status="PASS" endtime="20230125 15:28:18.836" starttime="20230125 15:28:18.821"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_password}</var>
+<arg>${response.json()}[data][wp_password]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.836" level="INFO">${Site_password} = kifZyMA0PnNHsUQLthOY</msg>
+<status status="PASS" endtime="20230125 15:28:18.836" starttime="20230125 15:28:18.836"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_password}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:18.836" level="INFO">${Site_password} = kifZyMA0PnNHsUQLthOY</msg>
+<status status="PASS" endtime="20230125 15:28:18.836" starttime="20230125 15:28:18.836"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pool_site_status}</var>
+<arg>${response.json()}[data][is_pool]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.836" level="INFO">${pool_site_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:18.836" starttime="20230125 15:28:18.836"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${pool_site_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:18.852" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:18.852" starttime="20230125 15:28:18.852"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:18.852" starttime="20230125 15:28:16.836"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:18.852" starttime="20230125 15:28:16.836"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:18.852" starttime="20230125 15:28:16.836"/>
+</kw>
+<doc>Create Site (From Scratch)</doc>
+<status status="PASS" endtime="20230125 15:28:18.852" starttime="20230125 15:28:16.836"/>
+</test>
+<test id="s1-s2-t2" name="Get List of Sites">
+<kw name="Get List of Sites" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Get List of Sites</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Get List of Sites" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:18.867" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:18.867" starttime="20230125 15:28:18.867"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:18.867" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:18.867" starttime="20230125 15:28:18.867"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:18.867" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:18.883" starttime="20230125 15:28:18.867"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:18.883" starttime="20230125 15:28:18.867"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:18.883" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:18.883" starttime="20230125 15:28:18.883"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:18.883" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:18.883" starttime="20230125 15:28:18.883"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:19.430" level="INFO">GET Request : url=https://app.instawp.io/api/v2/sites 
+ path_url=/api/v2/sites 
+ headers={'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:19.430" level="INFO">GET Response : url=https://app.instawp.io/api/v2/sites 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '57', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=uD1lKQYfn%2FpfxmXsGLF7FqVMyYNZOtVvjCvqDaJqtIAfiuaJ42fRpVK6ypyCP90m1fA2rXouG4n6FiMrc76ejCBRzArALjzHF632PviQI2bF21JbiJYk3xub4iRwXSCMwQ%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:19 GMT', 'CF-RAY': '78f026511b122985-CDG', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Sites fetched Successfully.","data":[{"id":123746,"name":"meunleashed-sese","url":"https:\/\/meunleashed-sese.instawp.xyz","user_id":9027,"is_expired":0,"is_suspended":0,"is_reserved":0,"disk_usage_mb":71,"domain_url":"meunleashed-sese.instawp.xyz","expired_at":"2023-01-27T09:58:17.000000Z","should_deleted_at":"2023-02-03T09:58:17.000000Z","tags":[],"created_at":"2023-01-25T09:58:17.000000Z","updated_at":"2023-01-25T09:58:17.000000Z","server":null,"user":{"id":9027,"email":null,"name":"Md Ikbal Hossain","profile_photo_url":"https:\/\/ui-avatars.com\/api\/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF"},"tag_id_array":[],"is_domain_register":false,"sub_domain":"meunleashed-sese.instawp.xyz","expired_at_format":"1 day, 23 hours, 59 mins","deleted_at_format":"8 day, 23 hours, 59 mins","php_version":"7.4","wp_version":"6.1.1","php_config_json":[{"runcloud_key":"maxExecutionTime","key":"max_execution_time","value":30,"tooltip_txt":"","info_text":"(seconds)","is_pro_feature":true},{"runcloud_key":"maxInputTime","key":"max_input_time","value":60,"info_text":"(seconds)","tooltip_txt":"","is_pro_feature":false},{"runcloud_key":"maxInputVars","key":"max_input_vars","value":1000,"tooltip_txt":""},{"runcloud_key":"memoryLimit","key":"memory_limit","value":128,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"allowUrlFopen","key":"allow_url_fopen","value":1,"tooltip_txt":"(0 or 1)"},{"runcloud_key":"postMaxSize","key":"post_max_size","value":256,"tooltip_txt":"","info_text":"(mb)"},{"runcloud_key":"uploadMaxFilesize","key":"upload_max_filesize","value":256,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"sessionGcMaxlifetime","key":"session.gc_maxlifetime","value":1440,"tooltip_txt":"","info_text":"(seconds)"}],"cloud_type":"instacloud","site_meta":{"ic_site_id":68861,"site_name":"meunleashed-sese.instawp.xyz","wp_cli":false,"server_cli":false,"wp_admin_url":"https:\/\/meunleashed-sese.instawp.xyz\/wp-admin","wp_admin_email":"litonikbal@gmail.com","server_username":"hakolikayo4335","server_password":"Cspl7jW0hDExVnLm8ISG","wp_username":"nofexabubi5641","wp_password":"kifZyMA0PnNHsUQLthOY","db_username":"hakolikayo4335_vavefitozo0452","db_password":"bG6t0WD4XgR2n9jqQlYH","db_name":"hakolikayo4335_hFMQKunadxCJ910TtSR5"},"template":null,"templates":[],"gitrepositories_ids":[],"ssl_status":null,"ftp_enabled":false,"ssh_enabled":false,"hash":"$2y$10$0ZicuAgRFa9S853To706eORDp1jsS4wf8zjg2KPQPZMzjbcOwrw7u","ic_server_group_id":1,"suffix_domain_id":1,"status":0,"htpassword":null,"webhook_url":"https:\/\/app.instawp.io\/deployments\/site\/webhook\/f2aa46e8-7fb9-4c9b-a435-f72f22a563f3","wp_admin_url":"https:\/\/meunleashed-sese.instawp.xyz\/wp-admin"},{"id":123745,"name":"h-invasion-ciga","url":"https:\/\/h-invasion-ciga.instawp.xyz","user_id":9027,"is_expired":0,"is_suspended":0,"is_reserved":0,"disk_usage_mb":71,"domain_url":"h-invasion-ciga.instawp.xyz","expired_at":"2023-01-27T09:58:14.000000Z","should_deleted_at":"2023-02-03T09:58:14.000000Z","tags":[],"created_at":"2023-01-25T09:58:14.000000Z","updated_at":"2023-01-25T09:58:17.000000Z","server":null,"user":{"id":9027,"email":null,"name":"Md Ikbal Hossain","profile_photo_url":"https:\/\/ui-avatars.com\/api\/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF"},"tag_id_array":[],"is_domain_register":false,"sub_domain":"h-invasion-ciga.instawp.xyz","expired_at_format":"1 day, 23 hours, 59 mins","deleted_at_format":"8 day, 23 hours, 59 mins","php_version":"7.4","wp_version":"6.1.1","php_config_json":[{"runcloud_key":"maxExecutionTime","key":"max_execution_time","value":30,"tooltip_txt":"","info_text":"(seconds)","is_pro_feature":true},{"runcloud_key":"maxInputTime","key":"max_input_time","value":60,"info_text":"(seconds)","tooltip_txt":"","is_pro_feature":false},{"runcloud_key":"maxInputVars","key":"max_input_vars","value":1000,"tooltip_txt":""},{"runcloud_key":"memoryLimit","key":"memory_limit","value":128,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"allowUrlFopen","key":"allow_url_fopen","value":1,"tooltip_txt":"(0 or 1)"},{"runcloud_key":"postMaxSize","key":"post_max_size","value":256,"tooltip_txt":"","info_text":"(mb)"},{"runcloud_key":"uploadMaxFilesize","key":"upload_max_filesize","value":256,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"sessionGcMaxlifetime","key":"session.gc_maxlifetime","value":1440,"tooltip_txt":"","info_text":"(seconds)"}],"cloud_type":"instacloud","site_meta":{"ic_site_id":68860,"site_name":"h-invasion-ciga.instawp.xyz","wp_cli":false,"server_cli":false,"wp_admin_url":"https:\/\/h-invasion-ciga.instawp.xyz\/wp-admin","wp_admin_email":"litonikbal@gmail.com","server_username":"magacamoyo5471","server_password":"u0oOFxnwXHMN3kDjhSbr","wp_username":"cijizahixu7397","wp_password":"9OJ8g1RCkbrIdtV6aX23","db_username":"magacamoyo5471_duyenahika5200","db_password":"NLTl4k7YFzp1CesPmZGo","db_name":"magacamoyo5471_EOfGm624pC9hM8t1bABn"},"template":null,"templates":[],"gitrepositories_ids":[],"ssl_status":null,"ftp_enabled":false,"ssh_enabled":false,"hash":"$2y$10$th6jxpzZnJoZWtrLEdR8luoqI840QrdEqHSjDcJscvfEp\/oqzam56","ic_server_group_id":1,"suffix_domain_id":1,"status":0,"htpassword":null,"webhook_url":"https:\/\/app.instawp.io\/deployments\/site\/webhook\/cdac3080-d025-4973-b370-1f89fb0a7cb9","wp_admin_url":"https:\/\/h-invasion-ciga.instawp.xyz\/wp-admin"}],"links":{"first":"https:\/\/app.instawp.io\/api\/v2\/sites?page=1","last":"https:\/\/app.instawp.io\/api\/v2\/sites?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&amp;laquo; Previous","active":false},{"url":"https:\/\/app.instawp.io\/api\/v2\/sites?page=1","label":"1","active":true},{"url":null,"label":"Next &amp;raquo;","active":false}],"path":"https:\/\/app.instawp.io\/api\/v2\/sites","per_page":5,"to":2,"total":2}} 
+ </msg>
+<msg timestamp="20230125 15:28:19.430" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:19.430" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:19.430" starttime="20230125 15:28:18.883"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.430" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:19.430" starttime="20230125 15:28:19.430"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:19.430" starttime="20230125 15:28:19.430"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${response_json}</var>
+<arg>${response.json()['data']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:19.446" level="INFO">${response_json} = [{u'status': 0, u'ftp_enabled': False, u'gitrepositories_ids': [], u'is_suspended': 0, u'updated_at': u'2023-01-25T09:58:17.000000Z', u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin',...</msg>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:19.430"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response_json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.446" level="INFO">[{u'status': 0, u'ftp_enabled': False, u'gitrepositories_ids': [], u'is_suspended': 0, u'updated_at': u'2023-01-25T09:58:17.000000Z', u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin', u'sub_domain': u'meunleashed-sese.instawp.xyz', u'id': 123746, u'wp_version': u'6.1.1', u'user_id': 9027, u'disk_usage_mb': 71, u'cloud_type': u'instacloud', u'expired_at_format': u'1 day, 23 hours, 59 mins', u'suffix_domain_id': 1, u'php_version': u'7.4', u'should_deleted_at': u'2023-02-03T09:58:17.000000Z', u'templates': [], u'hash': u'$2y$10$0ZicuAgRFa9S853To706eORDp1jsS4wf8zjg2KPQPZMzjbcOwrw7u', u'template': None, u'tags': [], u'deleted_at_format': u'8 day, 23 hours, 59 mins', u'is_domain_register': False, u'user': {u'profile_photo_url': u'https://ui-avatars.com/api/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF', u'id': 9027, u'name': u'Md Ikbal Hossain', u'email': None}, u'domain_url': u'meunleashed-sese.instawp.xyz', u'site_meta': {u'ic_site_id': 68861, u'wp_cli': False, u'wp_username': u'nofexabubi5641', u'site_name': u'meunleashed-sese.instawp.xyz', u'db_password': u'bG6t0WD4XgR2n9jqQlYH', u'server_cli': False, u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin', u'wp_password': u'kifZyMA0PnNHsUQLthOY', u'db_name': u'hakolikayo4335_hFMQKunadxCJ910TtSR5', u'db_username': u'hakolikayo4335_vavefitozo0452', u'server_password': u'Cspl7jW0hDExVnLm8ISG', u'server_username': u'hakolikayo4335', u'wp_admin_email': u'litonikbal@gmail.com'}, u'expired_at': u'2023-01-27T09:58:17.000000Z', u'is_reserved': 0, u'name': u'meunleashed-sese', u'url': u'https://meunleashed-sese.instawp.xyz', u'created_at': u'2023-01-25T09:58:17.000000Z', u'htpassword': None, u'tag_id_array': [], u'server': None, u'php_config_json': [{u'runcloud_key': u'maxExecutionTime', u'info_text': u'(seconds)', u'value': 30, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'max_execution_time'}, {u'runcloud_key': u'maxInputTime', u'info_text': u'(seconds)', u'value': 60, u'tooltip_txt': u'', u'is_pro_feature': False, u'key': u'max_input_time'}, {u'runcloud_key': u'maxInputVars', u'value': 1000, u'key': u'max_input_vars', u'tooltip_txt': u''}, {u'runcloud_key': u'memoryLimit', u'info_text': u'(mb)', u'value': 128, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'memory_limit'}, {u'runcloud_key': u'allowUrlFopen', u'value': 1, u'key': u'allow_url_fopen', u'tooltip_txt': u'(0 or 1)'}, {u'runcloud_key': u'postMaxSize', u'info_text': u'(mb)', u'value': 256, u'key': u'post_max_size', u'tooltip_txt': u''}, {u'runcloud_key': u'uploadMaxFilesize', u'info_text': u'(mb)', u'value': 256, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'upload_max_filesize'}, {u'runcloud_key': u'sessionGcMaxlifetime', u'info_text': u'(seconds)', u'value': 1440, u'key': u'session.gc_maxlifetime', u'tooltip_txt': u''}], u'ic_server_group_id': 1, u'webhook_url': u'https://app.instawp.io/deployments/site/webhook/f2aa46e8-7fb9-4c9b-a435-f72f22a563f3', u'ssh_enabled': False, u'is_expired': 0, u'ssl_status': None}, {u'status': 0, u'ftp_enabled': False, u'gitrepositories_ids': [], u'is_suspended': 0, u'updated_at': u'2023-01-25T09:58:17.000000Z', u'wp_admin_url': u'https://h-invasion-ciga.instawp.xyz/wp-admin', u'sub_domain': u'h-invasion-ciga.instawp.xyz', u'id': 123745, u'wp_version': u'6.1.1', u'user_id': 9027, u'disk_usage_mb': 71, u'cloud_type': u'instacloud', u'expired_at_format': u'1 day, 23 hours, 59 mins', u'suffix_domain_id': 1, u'php_version': u'7.4', u'should_deleted_at': u'2023-02-03T09:58:14.000000Z', u'templates': [], u'hash': u'$2y$10$th6jxpzZnJoZWtrLEdR8luoqI840QrdEqHSjDcJscvfEp/oqzam56', u'template': None, u'tags': [], u'deleted_at_format': u'8 day, 23 hours, 59 mins', u'is_domain_register': False, u'user': {u'profile_photo_url': u'https://ui-avatars.com/api/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF', u'id': 9027, u'name': u'Md Ikbal Hossain', u'email': None}, u'domain_url': u'h-invasion-ciga.instawp.xyz', u'site_meta': {u'ic_site_id': 68860, u'wp_cli': False, u'wp_username': u'cijizahixu7397', u'site_name': u'h-invasion-ciga.instawp.xyz', u'db_password': u'NLTl4k7YFzp1CesPmZGo', u'server_cli': False, u'wp_admin_url': u'https://h-invasion-ciga.instawp.xyz/wp-admin', u'wp_password': u'9OJ8g1RCkbrIdtV6aX23', u'db_name': u'magacamoyo5471_EOfGm624pC9hM8t1bABn', u'db_username': u'magacamoyo5471_duyenahika5200', u'server_password': u'u0oOFxnwXHMN3kDjhSbr', u'server_username': u'magacamoyo5471', u'wp_admin_email': u'litonikbal@gmail.com'}, u'expired_at': u'2023-01-27T09:58:14.000000Z', u'is_reserved': 0, u'name': u'h-invasion-ciga', u'url': u'https://h-invasion-ciga.instawp.xyz', u'created_at': u'2023-01-25T09:58:14.000000Z', u'htpassword': None, u'tag_id_array': [], u'server': None, u'php_config_json': [{u'runcloud_key': u'maxExecutionTime', u'info_text': u'(seconds)', u'value': 30, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'max_execution_time'}, {u'runcloud_key': u'maxInputTime', u'info_text': u'(seconds)', u'value': 60, u'tooltip_txt': u'', u'is_pro_feature': False, u'key': u'max_input_time'}, {u'runcloud_key': u'maxInputVars', u'value': 1000, u'key': u'max_input_vars', u'tooltip_txt': u''}, {u'runcloud_key': u'memoryLimit', u'info_text': u'(mb)', u'value': 128, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'memory_limit'}, {u'runcloud_key': u'allowUrlFopen', u'value': 1, u'key': u'allow_url_fopen', u'tooltip_txt': u'(0 or 1)'}, {u'runcloud_key': u'postMaxSize', u'info_text': u'(mb)', u'value': 256, u'key': u'post_max_size', u'tooltip_txt': u''}, {u'runcloud_key': u'uploadMaxFilesize', u'info_text': u'(mb)', u'value': 256, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'upload_max_filesize'}, {u'runcloud_key': u'sessionGcMaxlifetime', u'info_text': u'(seconds)', u'value': 1440, u'key': u'session.gc_maxlifetime', u'tooltip_txt': u''}], u'ic_server_group_id': 1, u'webhook_url': u'https://app.instawp.io/deployments/site/webhook/cdac3080-d025-4973-b370-1f89fb0a7cb9', u'ssh_enabled': False, u'is_expired': 0, u'ssl_status': None}]</msg>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:19.446"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response_json}[0][url]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.446" level="INFO">https://meunleashed-sese.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:19.446"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${fetched_url}</var>
+<arg>${response_json}[0][url]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:19.446" level="INFO">${fetched_url} = https://meunleashed-sese.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:19.446"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:18.867"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:18.867"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.446" starttime="20230125 15:28:18.852"/>
+</kw>
+<doc>get the list of sites</doc>
+<status status="PASS" endtime="20230125 15:28:19.461" starttime="20230125 15:28:18.852"/>
+</test>
+<test id="s1-s2-t3" name="Get Site Object">
+<kw name="Get Site Object" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Get Site Object</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Get Site Object" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:19.477" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:19.477" starttime="20230125 15:28:19.477"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:19.477" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:19.477" starttime="20230125 15:28:19.477"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:19.477" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:19.477" starttime="20230125 15:28:19.477"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.477" starttime="20230125 15:28:19.477"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:19.477" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:19.477" starttime="20230125 15:28:19.477"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.492" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:19.492" starttime="20230125 15:28:19.477"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites/${site_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:19.915" level="INFO">GET Request : url=https://app.instawp.io/api/v2/sites/123746 
+ path_url=/api/v2/sites/123746 
+ headers={'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:19.915" level="INFO">GET Response : url=https://app.instawp.io/api/v2/sites/123746 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '56', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=4b3dGB6%2B5rW3LvZu7XC8PKwJfA%2F21jxEvQAfa%2BusfaTGBJUsNwSr9q5ejD37SKUE2nQri9peM0LZDbKCj0NTwc0nwyMJdcZcpLV5Dn8pd0b91kAl%2FD%2FQi0SL19wJukUPMw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:19 GMT', 'CF-RAY': '78f026548b349b22-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Ok","data":{"id":123746,"name":"meunleashed-sese","url":"https:\/\/meunleashed-sese.instawp.xyz","user_id":9027,"is_expired":0,"is_suspended":0,"is_reserved":0,"disk_usage_mb":71,"domain_url":"meunleashed-sese.instawp.xyz","expired_at":"2023-01-27T09:58:17.000000Z","should_deleted_at":"2023-02-03T09:58:17.000000Z","tags":[],"created_at":"2023-01-25T09:58:17.000000Z","updated_at":"2023-01-25T09:58:19.000000Z","server":null,"user":{"id":9027,"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain","profile_photo_url":"https:\/\/ui-avatars.com\/api\/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF"},"tag_id_array":[],"is_domain_register":false,"sub_domain":"meunleashed-sese.instawp.xyz","expired_at_format":"1 day, 23 hours, 59 mins","deleted_at_format":"8 day, 23 hours, 59 mins","php_version":"7.4","wp_version":"6.1.1","php_config_json":[{"runcloud_key":"maxExecutionTime","key":"max_execution_time","value":30,"tooltip_txt":"","info_text":"(seconds)","is_pro_feature":true},{"runcloud_key":"maxInputTime","key":"max_input_time","value":60,"info_text":"(seconds)","tooltip_txt":"","is_pro_feature":false},{"runcloud_key":"maxInputVars","key":"max_input_vars","value":1000,"tooltip_txt":""},{"runcloud_key":"memoryLimit","key":"memory_limit","value":128,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"allowUrlFopen","key":"allow_url_fopen","value":1,"tooltip_txt":"(0 or 1)"},{"runcloud_key":"postMaxSize","key":"post_max_size","value":256,"tooltip_txt":"","info_text":"(mb)"},{"runcloud_key":"uploadMaxFilesize","key":"upload_max_filesize","value":256,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"sessionGcMaxlifetime","key":"session.gc_maxlifetime","value":1440,"tooltip_txt":"","info_text":"(seconds)"}],"cloud_type":"instacloud","site_meta":{"ic_site_id":68861,"site_name":"meunleashed-sese.instawp.xyz","wp_cli":false,"server_cli":false,"wp_admin_url":"https:\/\/meunleashed-sese.instawp.xyz\/wp-admin","wp_admin_email":"litonikbal@gmail.com","server_username":"hakolikayo4335","server_password":"Cspl7jW0hDExVnLm8ISG","wp_username":"nofexabubi5641","wp_password":"kifZyMA0PnNHsUQLthOY","db_username":"hakolikayo4335_vavefitozo0452","db_password":"bG6t0WD4XgR2n9jqQlYH","db_name":"hakolikayo4335_hFMQKunadxCJ910TtSR5"},"template":null,"templates":[],"gitrepositories_ids":[],"ssl_status":null,"ftp_enabled":false,"ssh_enabled":false,"hash":"$2y$10$0ZicuAgRFa9S853To706eORDp1jsS4wf8zjg2KPQPZMzjbcOwrw7u","ic_server_group_id":1,"suffix_domain_id":1,"status":0,"htpassword":null,"webhook_url":"https:\/\/app.instawp.io\/deployments\/site\/webhook\/f2aa46e8-7fb9-4c9b-a435-f72f22a563f3","wp_admin_url":"https:\/\/meunleashed-sese.instawp.xyz\/wp-admin"}} 
+ </msg>
+<msg timestamp="20230125 15:28:19.915" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:19.930" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:19.930" starttime="20230125 15:28:19.492"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.930" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:19.930" starttime="20230125 15:28:19.930"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:19.930" starttime="20230125 15:28:19.930"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${response_json}</var>
+<arg>${response.json()['data']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:19.930" level="INFO">${response_json} = {u'status': 0, u'ftp_enabled': False, u'gitrepositories_ids': [], u'is_suspended': 0, u'updated_at': u'2023-01-25T09:58:19.000000Z', u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin', ...</msg>
+<status status="PASS" endtime="20230125 15:28:19.930" starttime="20230125 15:28:19.930"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response_json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.946" level="INFO">{u'status': 0, u'ftp_enabled': False, u'gitrepositories_ids': [], u'is_suspended': 0, u'updated_at': u'2023-01-25T09:58:19.000000Z', u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin', u'sub_domain': u'meunleashed-sese.instawp.xyz', u'id': 123746, u'wp_version': u'6.1.1', u'user_id': 9027, u'disk_usage_mb': 71, u'cloud_type': u'instacloud', u'expired_at_format': u'1 day, 23 hours, 59 mins', u'suffix_domain_id': 1, u'php_version': u'7.4', u'should_deleted_at': u'2023-02-03T09:58:17.000000Z', u'templates': [], u'hash': u'$2y$10$0ZicuAgRFa9S853To706eORDp1jsS4wf8zjg2KPQPZMzjbcOwrw7u', u'template': None, u'tags': [], u'deleted_at_format': u'8 day, 23 hours, 59 mins', u'is_domain_register': False, u'user': {u'profile_photo_url': u'https://ui-avatars.com/api/?name=M+I+H&amp;color=7F9CF5&amp;background=EBF4FF', u'id': 9027, u'name': u'Md Ikbal Hossain', u'email': u'litonikbal@gmail.com'}, u'domain_url': u'meunleashed-sese.instawp.xyz', u'site_meta': {u'ic_site_id': 68861, u'wp_cli': False, u'wp_username': u'nofexabubi5641', u'site_name': u'meunleashed-sese.instawp.xyz', u'db_password': u'bG6t0WD4XgR2n9jqQlYH', u'server_cli': False, u'wp_admin_url': u'https://meunleashed-sese.instawp.xyz/wp-admin', u'wp_password': u'kifZyMA0PnNHsUQLthOY', u'db_name': u'hakolikayo4335_hFMQKunadxCJ910TtSR5', u'db_username': u'hakolikayo4335_vavefitozo0452', u'server_password': u'Cspl7jW0hDExVnLm8ISG', u'server_username': u'hakolikayo4335', u'wp_admin_email': u'litonikbal@gmail.com'}, u'expired_at': u'2023-01-27T09:58:17.000000Z', u'is_reserved': 0, u'name': u'meunleashed-sese', u'url': u'https://meunleashed-sese.instawp.xyz', u'created_at': u'2023-01-25T09:58:17.000000Z', u'htpassword': None, u'tag_id_array': [], u'server': None, u'php_config_json': [{u'runcloud_key': u'maxExecutionTime', u'info_text': u'(seconds)', u'value': 30, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'max_execution_time'}, {u'runcloud_key': u'maxInputTime', u'info_text': u'(seconds)', u'value': 60, u'tooltip_txt': u'', u'is_pro_feature': False, u'key': u'max_input_time'}, {u'runcloud_key': u'maxInputVars', u'value': 1000, u'key': u'max_input_vars', u'tooltip_txt': u''}, {u'runcloud_key': u'memoryLimit', u'info_text': u'(mb)', u'value': 128, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'memory_limit'}, {u'runcloud_key': u'allowUrlFopen', u'value': 1, u'key': u'allow_url_fopen', u'tooltip_txt': u'(0 or 1)'}, {u'runcloud_key': u'postMaxSize', u'info_text': u'(mb)', u'value': 256, u'key': u'post_max_size', u'tooltip_txt': u''}, {u'runcloud_key': u'uploadMaxFilesize', u'info_text': u'(mb)', u'value': 256, u'tooltip_txt': u'', u'is_pro_feature': True, u'key': u'upload_max_filesize'}, {u'runcloud_key': u'sessionGcMaxlifetime', u'info_text': u'(seconds)', u'value': 1440, u'key': u'session.gc_maxlifetime', u'tooltip_txt': u''}], u'ic_server_group_id': 1, u'webhook_url': u'https://app.instawp.io/deployments/site/webhook/f2aa46e8-7fb9-4c9b-a435-f72f22a563f3', u'ssh_enabled': False, u'is_expired': 0, u'ssl_status': None}</msg>
+<status status="PASS" endtime="20230125 15:28:19.946" starttime="20230125 15:28:19.930"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.946" starttime="20230125 15:28:19.461"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.946" starttime="20230125 15:28:19.461"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.946" starttime="20230125 15:28:19.461"/>
+</kw>
+<doc>Get Site Object - GET https://app.instawp.io/api/v2/sites/{site_id}</doc>
+<status status="PASS" endtime="20230125 15:28:19.946" starttime="20230125 15:28:19.461"/>
+</test>
+<test id="s1-s2-t4" name="Delete a Site">
+<kw name="Delete a Site" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Delete a Site</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Delete a Site" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:19.961" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:19.961" starttime="20230125 15:28:19.961"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:19.961" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:19.961" starttime="20230125 15:28:19.961"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:19.961" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:19.961" starttime="20230125 15:28:19.961"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:19.961" starttime="20230125 15:28:19.961"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:19.961" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:19.961" starttime="20230125 15:28:19.961"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:19.961" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:19.977" starttime="20230125 15:28:19.961"/>
+</kw>
+<kw name="DELETE On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites/${site_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:21.539" level="INFO">DELETE Request : url=https://app.instawp.io/api/v2/sites/123746 
+ path_url=/api/v2/sites/123746 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:21.539" level="INFO">DELETE Response : url=https://app.instawp.io/api/v2/sites/123746 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '55', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":71,"teamActiveSiteDiskUsage":71}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=g2ir7kn9bQvyf5DogWrQXhDEOIg50hPA%2BJu3OAf2CK9Z9CoW8LsOmH5wF0GySTRB93G8xezWCqGLN6gvFBIrtWj5LoJgReLZKWEtaoajH6NNw6blbtnX9w89VPJkVmUsog%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:21 GMT', 'CF-RAY': '78f0265799a19957-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Site deletion work in progress.","data":[]} 
+ </msg>
+<msg timestamp="20230125 15:28:21.555" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:21.555" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:21.555" starttime="20230125 15:28:19.977"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:21.571" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:21.571" starttime="20230125 15:28:21.555"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:21.571" starttime="20230125 15:28:21.571"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${delete_message}</var>
+<arg>${response.json()}[message]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:21.586" level="INFO">${delete_message} = Site deletion work in progress.</msg>
+<status status="PASS" endtime="20230125 15:28:21.586" starttime="20230125 15:28:21.571"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${delete_message}</arg>
+<arg>Site deletion work in progress.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:21.586" starttime="20230125 15:28:21.586"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${delete_status}</var>
+<arg>${response.json()}[status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:21.602" level="INFO">${delete_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:21.586"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${delete_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:21.602" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:21.602"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:19.946"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:19.946"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:19.946"/>
+</kw>
+<doc>delete https://app.instawp.io/api/v2/sites/{site_id}</doc>
+<status status="PASS" endtime="20230125 15:28:21.602" starttime="20230125 15:28:19.946"/>
+</test>
+<status status="PASS" endtime="20230125 15:28:21.617" starttime="20230125 15:28:16.743"/>
+</suite>
+<suite source="C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\tests\Teams_api_testcase.robot" id="s1-s3" name="Teams api testcase">
+<test id="s1-s3-t1" name="List Teams">
+<kw name="List Teams" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..List Teams</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..List Teams" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:21.680" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:21.680" starttime="20230125 15:28:21.680"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:21.680" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:21.680" starttime="20230125 15:28:21.680"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:21.680" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:21.680" starttime="20230125 15:28:21.680"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:21.680" starttime="20230125 15:28:21.680"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:21.696" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:21.696" starttime="20230125 15:28:21.696"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:21.696" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:21.696" starttime="20230125 15:28:21.696"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/teams</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:22.117" level="INFO">GET Request : url=https://app.instawp.io/api/v2/teams 
+ path_url=/api/v2/teams 
+ headers={'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:22.117" level="INFO">GET Response : url=https://app.instawp.io/api/v2/teams 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '54', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":1,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":71,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":71,"teamActiveSiteDiskUsage":71}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=nSusjMN1YjKiAVTKes5xtQW5d7xBvTYuqh59sXqduRyjANc4B4jnd0cAU%2FKJWXC5gswahZfoqLxUlvb5iaLpW1VB1Ve7%2BCMBGOYUIH5rmN8LeoqIz9lFVyrmzPszKkHPNw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:22 GMT', 'CF-RAY': '78f0266269559a21-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Teams fetched successfully","data":[{"id":9117,"user_id":9027,"name":"Md's Team","personal_team":true,"customize_menus":"[1,2,3,4,5]","deleted_at":null,"server":null}]} 
+ </msg>
+<msg timestamp="20230125 15:28:22.133" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:22.133" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:22.133" starttime="20230125 15:28:21.696"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:22.133" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:22.133" starttime="20230125 15:28:22.133"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:22.149" starttime="20230125 15:28:22.133"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${team_messgae}</var>
+<arg>${response.json()}[message]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:22.164" level="INFO">${team_messgae} = Teams fetched successfully</msg>
+<status status="PASS" endtime="20230125 15:28:22.164" starttime="20230125 15:28:22.149"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_messgae}</arg>
+<arg>Teams fetched successfully</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:22.164" starttime="20230125 15:28:22.164"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${team_status}</var>
+<arg>${response.json()}[status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:22.164" level="INFO">${team_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:22.164" starttime="20230125 15:28:22.164"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${team_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:22.164" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:22.164" starttime="20230125 15:28:22.164"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${team_id}</var>
+<arg>${response.json()}[data]\[id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:22.180" level="INFO">${team_id} = [{u'user_id': 9027, u'name': u"Md's Team", u'server': None, u'personal_team': True, u'customize_menus': u'[1,2,3,4,5]', u'deleted_at': None, u'id': 9117}][id]</msg>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:22.164"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:21.680"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:21.680"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:21.664"/>
+</kw>
+<doc>GET https://app.instawp.io/api/v2/teams</doc>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:21.664"/>
+</test>
+<status status="PASS" endtime="20230125 15:28:22.180" starttime="20230125 15:28:21.617"/>
+</suite>
+<suite source="C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\tests\Template_api_testcase.robot" id="s1-s4" name="Template api testcase">
+<test id="s1-s4-t1" name="Create Template">
+<kw name="Create Template" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Create Template</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Create Template" library="api_keywords">
+<kw name="Random template name" library="api_keywords">
+<kw name="Generate Random String" library="String">
+<var>${temp_name}</var>
+<arg>8</arg>
+<arg>[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230125 15:28:22.258" level="INFO">${temp_name} = OjulPsDc</msg>
+<status status="PASS" endtime="20230125 15:28:22.258" starttime="20230125 15:28:22.258"/>
+</kw>
+<kw name="Convert To Lower Case" library="String">
+<var>${template_name}</var>
+<arg>${temp_name}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20230125 15:28:22.258" level="INFO">${template_name} = ojulpsdc</msg>
+<status status="PASS" endtime="20230125 15:28:22.258" starttime="20230125 15:28:22.258"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${template_name}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:22.258" level="INFO">${template_name} = ojulpsdc</msg>
+<status status="PASS" endtime="20230125 15:28:22.258" starttime="20230125 15:28:22.258"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.258" starttime="20230125 15:28:22.258"/>
+</kw>
+<kw name="Random template description" library="api_keywords">
+<kw name="Generate Random String" library="String">
+<var>${temp_desp}</var>
+<arg>10</arg>
+<arg>[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230125 15:28:22.274" level="INFO">${temp_desp} = ZleGcyffls</msg>
+<status status="PASS" endtime="20230125 15:28:22.274" starttime="20230125 15:28:22.258"/>
+</kw>
+<kw name="Convert To Lower Case" library="String">
+<var>${template_desp}</var>
+<arg>${temp_desp}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20230125 15:28:22.274" level="INFO">${template_desp} = zlegcyffls</msg>
+<status status="PASS" endtime="20230125 15:28:22.274" starttime="20230125 15:28:22.274"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${template_desp}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:22.274" level="INFO">${template_desp} = zlegcyffls</msg>
+<status status="PASS" endtime="20230125 15:28:22.274" starttime="20230125 15:28:22.274"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.274" starttime="20230125 15:28:22.258"/>
+</kw>
+<kw name="Create a Site" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Create a Site</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Create a Site" library="api_keywords">
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${file_data}</var>
+<arg>C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api\\Testdata\\sitecreation.json</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230125 15:28:22.274" html="true" level="INFO">Getting file '&lt;a href="file://C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\sitecreation.json"&gt;C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\Testdata\sitecreation.json&lt;/a&gt;'.</msg>
+<msg timestamp="20230125 15:28:22.274" level="INFO">${file_data} = {
+    "is_reserved":false,
+    "php_version":"7.4",
+    "site_name":"Testing",
+    "wp_version":"6.0"
+}</msg>
+<status status="PASS" endtime="20230125 15:28:22.274" starttime="20230125 15:28:22.274"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${files}</var>
+<arg>file=${file_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:22.289" level="INFO">${files} = {u'file': '{\r\n    "is_reserved":false,\r\n    "php_version":"7.4",\r\n    "site_name":"Testing",\r\n    "wp_version":"6.0"\r\n}'}</msg>
+<status status="PASS" endtime="20230125 15:28:22.289" starttime="20230125 15:28:22.289"/>
+</kw>
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:22.289" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:22.289" starttime="20230125 15:28:22.289"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:22.289" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:22.289" starttime="20230125 15:28:22.289"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:22.289" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:22.289" starttime="20230125 15:28:22.289"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:22.289" starttime="20230125 15:28:22.289"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:22.305" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:22.305" starttime="20230125 15:28:22.289"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/sites</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>files=${files}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:24.758" level="INFO">POST Request : url=https://app.instawp.io/api/v2/sites 
+ path_url=/api/v2/sites 
+ headers={'Content-Length': '248', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Content-Type': 'multipart/form-data; boundary=e6b56c56eca5c0cefff0dbff83993fc9', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body=--e6b56c56eca5c0cefff0dbff83993fc9
+Content-Disposition: form-data; name="file"; filename="file"
+
+{
+    "is_reserved":false,
+    "php_version":"7.4",
+    "site_name":"Testing",
+    "wp_version":"6.0"
+}
+--e6b56c56eca5c0cefff0dbff83993fc9--
+ 
+ </msg>
+<msg timestamp="20230125 15:28:24.758" level="INFO">POST Response : url=https://app.instawp.io/api/v2/sites 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '53', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":0,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":true,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=yEq%2Btf6CQvHQkMgDH%2F8AvvBe9T4sWqW1LkqQe9N%2BDvUHabR5j0umEt8EtcBVLpLe98ZAy1w5jnVS5voKW55YM54AwsMt%2B%2By4DjUVTV8ASzClAznxBVwPNn3fwkfne7TQjA%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:24 GMT', 'CF-RAY': '78f026663e34696a-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Site installation work in completed, Your website is ready!","data":{"is_pool":true,"message":"Site installation work in completed, Your website is ready!","status":1,"wp_url":"https:\/\/st-x-treme-guzo.instawp.xyz","wp_username":"vehetecibe9091","wp_password":"emvkLn5iwO13fAsY92HW","id":123747,"s_hash":"$2y$10$flkekbLBXWYNKRtJEwZzD.lb5yl6z9PGEHy38Edk3d0Zpr6XrO1tO","token":null}} 
+ </msg>
+<msg timestamp="20230125 15:28:24.774" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:24.774" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.774" starttime="20230125 15:28:22.305"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:24.789" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.789" starttime="20230125 15:28:24.774"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:24.820" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.820" starttime="20230125 15:28:24.789"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.reason}</arg>
+<arg>OK</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:24.820" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.820" starttime="20230125 15:28:24.820"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:24.836" level="INFO">True</msg>
+<status status="PASS" endtime="20230125 15:28:24.836" starttime="20230125 15:28:24.820"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:24.836" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.836" starttime="20230125 15:28:24.836"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>Site installation work in completed, Your website is ready!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:24.836" starttime="20230125 15:28:24.836"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][id]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:24.852" level="INFO">123747</msg>
+<status status="PASS" endtime="20230125 15:28:24.852" starttime="20230125 15:28:24.836"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_id}</var>
+<arg>${response.json()}[data][id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:24.852" level="INFO">${site_id} = 123747</msg>
+<status status="PASS" endtime="20230125 15:28:24.852" starttime="20230125 15:28:24.852"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:24.852" level="INFO">${site_id} = 123747</msg>
+<status status="PASS" endtime="20230125 15:28:24.852" starttime="20230125 15:28:24.852"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:24.867" level="INFO">https://st-x-treme-guzo.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:24.867" starttime="20230125 15:28:24.852"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${site_url}</var>
+<arg>${response.json()}[data][wp_url]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:24.867" level="INFO">${site_url} = https://st-x-treme-guzo.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:24.867" starttime="20230125 15:28:24.867"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${site_url}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:24.867" level="INFO">${site_url} = https://st-x-treme-guzo.instawp.xyz</msg>
+<status status="PASS" endtime="20230125 15:28:24.867" starttime="20230125 15:28:24.867"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_username}</var>
+<arg>${response.json()}[data][wp_username]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:24.883" level="INFO">${Site_username} = vehetecibe9091</msg>
+<status status="PASS" endtime="20230125 15:28:24.883" starttime="20230125 15:28:24.867"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_username}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:24.883" level="INFO">${Site_username} = vehetecibe9091</msg>
+<status status="PASS" endtime="20230125 15:28:24.883" starttime="20230125 15:28:24.883"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Site_password}</var>
+<arg>${response.json()}[data][wp_password]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:24.883" level="INFO">${Site_password} = emvkLn5iwO13fAsY92HW</msg>
+<status status="PASS" endtime="20230125 15:28:24.883" starttime="20230125 15:28:24.883"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Site_password}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:24.883" level="INFO">${Site_password} = emvkLn5iwO13fAsY92HW</msg>
+<status status="PASS" endtime="20230125 15:28:24.883" starttime="20230125 15:28:24.883"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pool_site_status}</var>
+<arg>${response.json()}[data][is_pool]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:24.899" level="INFO">${pool_site_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:24.883"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${pool_site_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:24.899" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:24.899"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:22.274"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:22.274"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:22.274"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{data}</var>
+<arg>description=${template_desp}</arg>
+<arg>instant_template=False</arg>
+<arg>mark_as_public=True</arg>
+<arg>name=${template_name}</arg>
+<arg>site_id=${site_id}</arg>
+<arg>slug=Lincoln</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:24.899" level="INFO">&amp;{data} = { description=zlegcyffls | instant_template=False | mark_as_public=True | name=ojulpsdc | site_id=123747 | slug=Lincoln }</msg>
+<status status="PASS" endtime="20230125 15:28:24.899" starttime="20230125 15:28:24.899"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:24.914" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:24.914" starttime="20230125 15:28:24.899"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/templates</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:25.258" level="INFO">POST Request : url=https://app.instawp.io/api/v2/templates 
+ path_url=/api/v2/templates 
+ headers={'Content-Length': '142', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body={"description": "zlegcyffls", "instant_template": "False", "mark_as_public": "True", "name": "ojulpsdc", "site_id": 123747, "slug": "Lincoln"} 
+ </msg>
+<msg timestamp="20230125 15:28:25.274" level="INFO">POST Response : url=https://app.instawp.io/api/v2/templates 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '52', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=hYkVB88Wjfw00nh%2FV2hkemHAKNPfcuYR3KbVJ2aSXLRy4KVj3wsYUcxBkNOMoVzOGxNTnbf3e2AfTFcWv4O63Rqvr6UF21pReHUU5QaDEHtETD1vKx8gPxfSG2SSC48zpA%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:25 GMT', 'CF-RAY': '78f02675fed4696a-FRA', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":1,"message":"Template created successfully","data":{"template":{"user_id":9027,"team_id":9117,"name":"ojulpsdc","display_text":"zlegcyffls","slug":"Lincoln","site_life_time":4,"email_required":0,"collect_email":1,"send_credentials":1,"hide_privacy_checkbox":0,"disallow_file_modification":0,"auto_launch":0,"site_cloning":1,"redirect_url":null,"sync_emails_to":null,"instant_template":0,"site_url":"st-x-treme-guzo.instawp.xyz","active":1,"is_public_template":0,"mark_as_public":0,"white_label":1,"custom_email_subject":"You have created a new {{template_name}} site","custom_email_body":"&lt;p&gt;Hello there,&lt;\/p&gt; &lt;p&gt;{{template_description}}&lt;\/p&gt; &lt;p&gt;Your new WordPress website created by {{template_name}} is ready to use. Here are the credentials:&lt;\/p&gt; &lt;p&gt;{{credentials}}&lt;\/p&gt; &lt;p&gt;powered by &lt;a href=\"https:\/\/instawp.io\"&gt;InstaWP.io&lt;\/a&gt; &lt;\/p&gt;","custom_privacy_text":null,"custom_css":null,"zapier_webhook_url":null,"php_config_json":[{"runcloud_key":"maxExecutionTime","key":"max_execution_time","value":30,"tooltip_txt":"","info_text":"(seconds)","is_pro_feature":true},{"runcloud_key":"maxInputTime","key":"max_input_time","value":60,"info_text":"(seconds)","tooltip_txt":"","is_pro_feature":false},{"runcloud_key":"maxInputVars","key":"max_input_vars","value":1000,"tooltip_txt":""},{"runcloud_key":"memoryLimit","key":"memory_limit","value":128,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"allowUrlFopen","key":"allow_url_fopen","value":1,"tooltip_txt":"(0 or 1)"},{"runcloud_key":"postMaxSize","key":"post_max_size","value":256,"tooltip_txt":"","info_text":"(mb)"},{"runcloud_key":"uploadMaxFilesize","key":"upload_max_filesize","value":256,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"sessionGcMaxlifetime","key":"session.gc_maxlifetime","value":1440,"tooltip_txt":"","info_text":"(seconds)"}],"uuid":"af8051e4-b8b1-479a-8d60-3380b52b0eb8","php_version":"7.4","site_id":123747,"updated_at":"2023-01-25T09:58:25.000000Z","created_at":"2023-01-25T09:58:25.000000Z","id":4303,"is_favorite":false,"allow_modify":true,"webhook_url":"https:\/\/app.instawp.io\/deployments\/templates\/webhook\/af8051e4-b8b1-479a-8d60-3380b52b0eb8"}}} 
+ </msg>
+<msg timestamp="20230125 15:28:25.274" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:25.320" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:25.320" starttime="20230125 15:28:24.914"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:25.320" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:25.320" starttime="20230125 15:28:25.320"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:25.320" level="INFO">Argument types are:
+&lt;type 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:25.320" starttime="20230125 15:28:25.320"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.reason}</arg>
+<arg>OK</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:25.320" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:25.320" starttime="20230125 15:28:25.320"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.json()}[status]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:25.367" level="INFO">1</msg>
+<status status="PASS" endtime="20230125 15:28:25.367" starttime="20230125 15:28:25.320"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${message}</var>
+<arg>${response.json()}[message]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:25.367" level="INFO">${message} = Template created successfully</msg>
+<status status="PASS" endtime="20230125 15:28:25.367" starttime="20230125 15:28:25.367"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message}</arg>
+<arg>Template created successfully</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:25.367" starttime="20230125 15:28:25.367"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${resp_name}</var>
+<arg>${response.json()}[data][template][name]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:25.383" level="INFO">${resp_name} = ojulpsdc</msg>
+<status status="PASS" endtime="20230125 15:28:25.383" starttime="20230125 15:28:25.367"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp_name}</arg>
+<arg>${template_name}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:25.383" starttime="20230125 15:28:25.383"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${resp_desp}</var>
+<arg>${response.json()}[data][template][display_text]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:25.383" level="INFO">${resp_desp} = zlegcyffls</msg>
+<status status="PASS" endtime="20230125 15:28:25.383" starttime="20230125 15:28:25.383"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp_desp}</arg>
+<arg>${template_desp}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:25.383"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${team_id}</var>
+<arg>${response.json()}[data][template][team_id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:25.399" level="INFO">${team_id} = 9117</msg>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:25.399"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${team_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:25.399" level="INFO">${team_id} = 9117</msg>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:25.399"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:22.258"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:22.258"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:22.242"/>
+</kw>
+<doc>POST https://app.instawp.io/api/v2/templates</doc>
+<status status="PASS" endtime="20230125 15:28:25.399" starttime="20230125 15:28:22.242"/>
+</test>
+<test id="s1-s4-t2" name="List Templates">
+<kw name="List Templates" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..List Templates</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..List Templates" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:25.430" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.414"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:25.430" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.430"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:25.430" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.430"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.414"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:25.430" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.430"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:25.430" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:25.430" starttime="20230125 15:28:25.430"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/templates</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:26.133" level="INFO">GET Request : url=https://app.instawp.io/api/v2/templates 
+ path_url=/api/v2/templates 
+ headers={'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:26.149" level="INFO">GET Response : url=https://app.instawp.io/api/v2/templates 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '51', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=GZnW69KT3tSJf9oXXGZjbvhqx348Ahe6hFXqPR9gj6fJbWceshEr7ENBWITiLW%2B5wFXse6OQXk52tEuV%2BzUv8Pqx8OOZrT1s6QYu%2F3Plv8J37iTI9%2FMLPsQ%2BsRuNPwMllw%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:26 GMT', 'CF-RAY': '78f0267aa94d2a3d-CDG', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Templates Fetched Successfully","data":[{"id":4303,"name":"ojulpsdc","user_id":9027,"site_id":123747,"team_id":9117,"display_text":"zlegcyffls","slug":"Lincoln","site_life_time":4,"email_required":0,"collect_email":1,"send_credentials":1,"hide_privacy_checkbox":0,"disallow_file_modification":0,"auto_launch":0,"site_cloning":1,"redirect_url":null,"sync_emails_to":null,"instant_template":0,"site_url":"st-x-treme-guzo.instawp.xyz","active":1,"is_public_template":0,"mark_as_public":0,"white_label":1,"custom_email_subject":"You have created a new {{template_name}} site","custom_email_body":"&lt;p&gt;Hello there,&lt;\/p&gt; &lt;p&gt;{{template_description}}&lt;\/p&gt; &lt;p&gt;Your new WordPress website created by {{template_name}} is ready to use. Here are the credentials:&lt;\/p&gt; &lt;p&gt;{{credentials}}&lt;\/p&gt; &lt;p&gt;powered by &lt;a href=\"https:\/\/instawp.io\"&gt;InstaWP.io&lt;\/a&gt; &lt;\/p&gt;","custom_privacy_text":null,"custom_css":null,"zapier_webhook_url":null,"php_config_json":[{"runcloud_key":"maxExecutionTime","key":"max_execution_time","value":30,"tooltip_txt":"","info_text":"(seconds)","is_pro_feature":true},{"runcloud_key":"maxInputTime","key":"max_input_time","value":60,"info_text":"(seconds)","tooltip_txt":"","is_pro_feature":false},{"runcloud_key":"maxInputVars","key":"max_input_vars","value":1000,"tooltip_txt":""},{"runcloud_key":"memoryLimit","key":"memory_limit","value":128,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"allowUrlFopen","key":"allow_url_fopen","value":1,"tooltip_txt":"(0 or 1)"},{"runcloud_key":"postMaxSize","key":"post_max_size","value":256,"tooltip_txt":"","info_text":"(mb)"},{"runcloud_key":"uploadMaxFilesize","key":"upload_max_filesize","value":256,"tooltip_txt":"","info_text":"(mb)","is_pro_feature":true},{"runcloud_key":"sessionGcMaxlifetime","key":"session.gc_maxlifetime","value":1440,"tooltip_txt":"","info_text":"(seconds)"}],"uuid":"af8051e4-b8b1-479a-8d60-3380b52b0eb8","file_bkp_path":null,"db_bkp_path":null,"ic_bkp_id":14112,"status":"in progress","logo":null,"post_creation_command":null,"hosting_account_id":null,"server_type":null,"auto_sync":false,"auto_sync_frequency":null,"synced_at":null,"created_at":"2023-01-25T09:58:25.000000Z","updated_at":"2023-01-25T09:58:25.000000Z"}],"links":{"first":"https:\/\/app.instawp.io\/api\/v2\/templates?page=1","last":"https:\/\/app.instawp.io\/api\/v2\/templates?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&amp;laquo; Previous","active":false},{"url":"https:\/\/app.instawp.io\/api\/v2\/templates?page=1","label":"1","active":true},{"url":null,"label":"Next &amp;raquo;","active":false}],"path":"https:\/\/app.instawp.io\/api\/v2\/templates","per_page":10,"to":1,"total":1}} 
+ </msg>
+<msg timestamp="20230125 15:28:26.149" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:26.149" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:26.149" starttime="20230125 15:28:25.430"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:26.149" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:26.149" starttime="20230125 15:28:26.149"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:26.149" starttime="20230125 15:28:26.149"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${message}</var>
+<arg>${response.json()}[message]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:26.164" level="INFO">${message} = Templates Fetched Successfully</msg>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:26.149"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message}</arg>
+<arg>Templates Fetched Successfully</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:26.164"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${template_id}</var>
+<arg>${response.json()}[data][0][id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:26.164" level="INFO">${template_id} = 4303</msg>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:26.164"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${template_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230125 15:28:26.164" level="INFO">${template_id} = 4303</msg>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:26.164"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:25.414"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:25.414"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.164" starttime="20230125 15:28:25.414"/>
+</kw>
+<doc>GET https://app.instawp.io/api/v2/templates</doc>
+<status status="PASS" endtime="20230125 15:28:26.180" starttime="20230125 15:28:25.414"/>
+</test>
+<test id="s1-s4-t3" name="Delete Template">
+<kw name="Delete Template" library="api_keywords">
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>..Delete Template</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="..Delete Template" library="api_keywords">
+<kw name="Setup Test Session" library="api_keywords">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_session}</var>
+<arg>test_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:26.195" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.180"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${test_session}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20230125 15:28:26.195" level="INFO">${test_session} = test_session</msg>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.195"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${test_session}</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230125 15:28:26.195" level="INFO">Creating Session using : alias=test_session, url=https://app.instawp.io/api/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.195"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.180"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Authorization=${TOKEN_BEARER}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230125 15:28:26.195" level="INFO">&amp;{headers} = { Authorization=Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8 }</msg>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.195"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:26.195" level="INFO">{u'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'}</msg>
+<status status="PASS" endtime="20230125 15:28:26.195" starttime="20230125 15:28:26.195"/>
+</kw>
+<kw name="DELETE On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${test_session}</arg>
+<arg>${URL}/templates/${template_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<msg timestamp="20230125 15:28:26.617" level="INFO">DELETE Request : url=https://app.instawp.io/api/v2/templates/4303 
+ path_url=/api/v2/templates/4303 
+ headers={'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1', 'Connection': 'keep-alive', 'Authorization': u'Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8'} 
+ body=None 
+ </msg>
+<msg timestamp="20230125 15:28:26.617" level="INFO">DELETE Response : url=https://app.instawp.io/api/v2/templates/4303 
+ status=200, reason=OK 
+ headers={'x-ratelimit-remaining': '50', 'x-xss-protection': '1; mode=block', 'x-content-type-options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'user-auth': '{"userAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"userUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"userCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamAllow":{"sites":3,"expiry_days":2,"reserve_sites":false,"restore_sites":3,"templates":1,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":500,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":5,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":100,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false,"api_quota_limit":100,"expiry_hours":48},"teamUsed":{"sites":2,"template_sites":0,"templates":1,"restore_sites":0,"git_operations":0,"disk_storage":142,"team_member":0},"teamCan":{"sites":true,"reserve_sites":false,"restore_sites":true,"templates":false,"custom_domain":false,"cloning":false,"ftp_access":false,"teams":false,"disk_storage":true,"template_customize":false,"white_label":false,"dedicated_server":false,"template_sites":true,"advance_template_options":false,"instant_template":false,"advance_config":false,"git_operations":true,"advance_deployments":false,"template_sites_exportcsv":false,"site_versions":false,"run_commands":false},"teamOwner":{"email":"litonikbal@gmail.com","name":"Md Ikbal Hossain"},"teamOwnerActivePlan":{"name":"Free","addons_description":null},"userActiveSiteDiskUsage":142,"teamActiveSiteDiskUsage":142}', 'CF-Cache-Status': 'DYNAMIC', 'expires': '-1', 'vary': 'Accept-Encoding, Origin,Authorization', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'x-ratelimit-limit': '60', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=hyBVU2oRZVjsvSBXrYvxM4t49wRb6taB44S1%2Fjn8PViNPSh9aXE%2By0vkET068cVYVM9AusLB%2FF0dNoqsyeWvkgllRP4t9WSLLI%2BBPNqpmSvFVgcKFfp0BuDIMFspbaeWsQ%3D%3D"}],"group":"cf-nel","max_age":604800}', 'pragma': 'no-cache', 'Cache-Control': 'private, must-revalidate', 'Date': 'Wed, 25 Jan 2023 09:58:26 GMT', 'CF-RAY': '78f0267ebdacd68e-CDG', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json'} 
+ body={"status":true,"message":"Template deletion in progress.","data":[]} 
+ </msg>
+<msg timestamp="20230125 15:28:26.617" level="INFO">c:\python27\lib\site-packages\urllib3\connectionpool.py:847: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20230125 15:28:26.633" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:26.633" starttime="20230125 15:28:26.195"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230125 15:28:26.633" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:26.633" starttime="20230125 15:28:26.633"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" endtime="20230125 15:28:26.648" starttime="20230125 15:28:26.633"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${delete_message}</var>
+<arg>${response.json()}[message]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:26.680" level="INFO">${delete_message} = Template deletion in progress.</msg>
+<status status="PASS" endtime="20230125 15:28:26.680" starttime="20230125 15:28:26.648"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${delete_status}</var>
+<arg>${response.json()}[status]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230125 15:28:26.695" level="INFO">${delete_status} = True</msg>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.680"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${delete_status}</arg>
+<arg>True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230125 15:28:26.695" level="INFO">Argument types are:
+&lt;type 'bool'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.695"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.180"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.180"/>
+</kw>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.180"/>
+</kw>
+<doc>DELETE https://app.instawp.io/api/v2/templates/{template_id}</doc>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:26.180"/>
+</test>
+<status status="PASS" endtime="20230125 15:28:26.695" starttime="20230125 15:28:22.196"/>
+</suite>
+<status status="PASS" endtime="20230125 15:28:26.711" starttime="20230125 15:28:11.549"/>
+</suite>
+<statistics>
+<total>
+<stat fail="0" skip="0" pass="9">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" skip="0" id="s1" name="Tests" pass="9">Tests</stat>
+<stat fail="0" skip="0" id="s1-s1" name="Createsite csv" pass="1">Tests.Createsite csv</stat>
+<stat fail="0" skip="0" id="s1-s2" name="Sites api testcases" pass="4">Tests.Sites api testcases</stat>
+<stat fail="0" skip="0" id="s1-s3" name="Teams api testcase" pass="1">Tests.Teams api testcase</stat>
+<stat fail="0" skip="0" id="s1-s4" name="Template api testcase" pass="3">Tests.Template api testcase</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230125 15:28:12.322" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 15: Setting variable 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api' failed: Invalid variable name 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api='.</msg>
+<msg timestamp="20230125 15:28:12.369" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 5: Importing library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Python27\Scripts\robot.exe
+  C:\WINDOWS\SYSTEM32\python27.zip
+  c:\python27\DLLs
+  c:\python27\lib
+  c:\python27\lib\plat-win
+  c:\python27\lib\lib-tk
+  c:\python27
+  C:\Users\Sadiya Afrin\AppData\Roaming\Python\Python27\site-packages
+  c:\python27\lib\site-packages</msg>
+<msg timestamp="20230125 15:28:16.758" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 15: Setting variable 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api' failed: Invalid variable name 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api='.</msg>
+<msg timestamp="20230125 15:28:16.821" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 5: Importing library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Python27\Scripts\robot.exe
+  C:\WINDOWS\SYSTEM32\python27.zip
+  c:\python27\DLLs
+  c:\python27\lib
+  c:\python27\lib\plat-win
+  c:\python27\lib\lib-tk
+  c:\python27
+  C:\Users\Sadiya Afrin\AppData\Roaming\Python\Python27\site-packages
+  c:\python27\lib\site-packages</msg>
+<msg timestamp="20230125 15:28:21.633" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 15: Setting variable 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api' failed: Invalid variable name 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api='.</msg>
+<msg timestamp="20230125 15:28:21.649" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 5: Importing library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Python27\Scripts\robot.exe
+  C:\WINDOWS\SYSTEM32\python27.zip
+  c:\python27\DLLs
+  c:\python27\lib
+  c:\python27\lib\plat-win
+  c:\python27\lib\lib-tk
+  c:\python27
+  C:\Users\Sadiya Afrin\AppData\Roaming\Python\Python27\site-packages
+  c:\python27\lib\site-packages</msg>
+<msg timestamp="20230125 15:28:22.211" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 15: Setting variable 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api' failed: Invalid variable name 'C:\\Users\\Sadiya Afrin\\Desktop\\Upwork clients\\Robot Framework-API Testing\\resources\\api='.</msg>
+<msg timestamp="20230125 15:28:22.227" level="ERROR">Error in file 'C:\Users\Sadiya Afrin\Desktop\Upwork clients\Robot Framework-API Testing\resources\api\api_keywords.robot' on line 5: Importing library 'JSONLibrary' failed: ImportError: No module named JSONLibrary
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Python27\Scripts\robot.exe
+  C:\WINDOWS\SYSTEM32\python27.zip
+  c:\python27\DLLs
+  c:\python27\lib
+  c:\python27\lib\plat-win
+  c:\python27\lib\lib-tk
+  c:\python27
+  C:\Users\Sadiya Afrin\AppData\Roaming\Python\Python27\site-packages
+  c:\python27\lib\site-packages</msg>
+</errors>
+</robot>
