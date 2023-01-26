@@ -1,5 +1,8 @@
 # API-AutomationTesting-Robot-Framework
-Client Project -app.Instawp.io -API Automation Testing using Robot Framework
+
+# Client Name - InstaWP (https://app.instawp.io)
+# Client Project  -Instawp API Automation Testing using Robot Framework
+# Project Description - Wordpress, Site and Template creation , Plungin and theam installation to created site, Deployement, Integration to Git repoitry via Instawp app, Provides Code Editor, PHP DB editor, View logs for created site, Manage domains , delete sties and template, Reserved sites.
 
 *Note*- Select - master brnch to view code and folders
 
