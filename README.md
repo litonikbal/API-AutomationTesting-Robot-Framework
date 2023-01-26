@@ -10,7 +10,7 @@ Library  OperatingSystem
 Library  JSONLibrary
 
 *To Run testcases*
-robot -d Result <testcase_file_path/testcasefilename>.robot
+robot -d Result -v ENVIROMENT:QA <testcase_file_path/testcasefilename>.robot
 
 *API Testcase covered* -
 1. Create a Site from csv
@@ -22,4 +22,6 @@ robot -d Result <testcase_file_path/testcasefilename>.robot
 7. Create Template
 8. List Template
 9. Delete Template
+10. List Configurations
+11. Create site from Template - Private site
 
