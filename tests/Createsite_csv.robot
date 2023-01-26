@@ -21,8 +21,8 @@ Create a Site from csv
     ${files}=  Create Dictionary  file=${file_data}
 
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
-    ${response}=  POST On Session  ${test_session}  ${URL}/sites  headers=&{headers}  files=${files}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
+    ${response}=  POST On Session  ${test_session}  ${URL_${ENVIROMENT}}/sites  headers=&{headers}  files=${files}
     log  ${response}
     Should Be Equal As Strings  ${response.status_code}  200
     Should Be Equal As Strings  ${response.reason}  OK

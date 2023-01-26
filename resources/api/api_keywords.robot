@@ -8,8 +8,13 @@ Library  JSONLibrary
 
 *** Variables ***
 ${GLOBAL_SESSION}=  global_session
-${URL}=    https://app.instawp.io/api/v2
-${TOKEN_BEARER}=  Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8
+${URL_APP}=    https://app.instawp.io/api/v2
+${TOKEN_BEARER_APP}=  Bearer k4JRwapClzVW6o5ZIHJqLYploLP3lK1b8LgMjDc8
+${URL_QA}=    https://qa.instawp.io/api/v2
+${TOKEN_BEARER_QA}=  Bearer MwIQ50CrFbfuJZyUY4Zf4te0cLPvDEtsvsvo7s4X
+${URL_STAGE}=    https://stage.instawp.io/api/v2
+${TOKEN_BEARER_STAGE}=  Bearer PF0i118ejGWg9jBb6arvpXYpD7W5qm2G5eFJhuwn
+${ENVIROMENT}=  STAGE   #use APP-for prod,QA-for QA,STAGE-for Stagging profile
 ${CONTENT_TYPE}=  application/json
 ${ACCEPT}=  application/json
 ${CURDIR}=  resources/Testdata
@@ -19,14 +24,14 @@ ${CURDIR}=  resources/Testdata
 Setup Test Session
     ${test_session}=  Set Variable  test_session
     Set Test Variable  ${test_session}
-    Create Session  ${test_session}  ${URL}
+    Create Session  ${test_session}  ${URL_${ENVIROMENT}}
 
 Teardown Test Session
     Delete All Sessions
 
 
 Wait Until Http Server Is Up And Running
-    Create Session  wait-until-up  ${URL}  max_retries=10
+    Create Session  wait-until-up  ${URL_${ENVIROMENT}}  max_retries=10
     Get On Session  wait-until-up  /
 
 
@@ -39,8 +44,8 @@ Create a Site
     ${files}=  Create Dictionary  file=${file_data}
 
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
-    ${response}=  POST On Session  ${test_session}  ${URL}/sites  headers=&{headers}  files=${files}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
+    ${response}=  POST On Session  ${test_session}  ${URL_${ENVIROMENT}}/sites  headers=&{headers}  files=${files}
     log  ${response}
     Should Be Equal As Strings  ${response.status_code}  200
     Should Be Equal As Strings  ${response.reason}  OK
@@ -68,10 +73,10 @@ Get List of Sites
 
 ..Get List of Sites
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  GET On session  ${test_session}  ${URL}/sites  headers=${headers}
+    ${response} =  GET On session  ${test_session}  ${URL_${ENVIROMENT}}/sites  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
     ${response_json}=   Set Variable  ${response.json()['data']}
@@ -85,10 +90,10 @@ Get Site Object
 
 ..Get Site Object
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  GET On session  ${test_session}  ${URL}/sites/${site_id}  headers=${headers}
+    ${response} =  GET On session  ${test_session}  ${URL_${ENVIROMENT}}/sites/${site_id}  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
     ${response_json}=   Set Variable  ${response.json()['data']}
@@ -100,10 +105,10 @@ Delete a Site
 
 ..Delete a Site
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  DELETE On Session  ${test_session}  ${URL}/sites/${site_id}  headers=${headers}
+    ${response} =  DELETE On Session  ${test_session}  ${URL_${ENVIROMENT}}/sites/${site_id}  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
 
@@ -119,10 +124,10 @@ List Teams
 
 ..List Teams
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  GET On Session  ${test_session}  ${URL}/teams  headers=${headers}
+    ${response} =  GET On Session  ${test_session}  ${URL_${ENVIROMENT}}/teams  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
 
@@ -155,9 +160,9 @@ Create Template
 
     &{data} =  Create dictionary  description=${template_desp}  instant_template=False  mark_as_public=True  name=${template_name}  site_id=${site_id}  slug=Lincoln
 
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
 
-    ${response}=  POST On Session  ${test_session}  ${URL}/templates  headers=&{headers}  json=${data}
+    ${response}=  POST On Session  ${test_session}  ${URL_${ENVIROMENT}}/templates  headers=&{headers}  json=${data}
 
     log  ${response}
     Should Be Equal As Strings  ${response.status_code}  200
@@ -181,10 +186,10 @@ List Templates
 
 ..List Templates
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  GET On Session  ${test_session}  ${URL}/templates  headers=${headers}
+    ${response} =  GET On Session  ${test_session}  ${URL_${ENVIROMENT}}/templates  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
 
@@ -200,10 +205,10 @@ Delete Template
 
 ..Delete Template
     Setup Test Session
-    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER}
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
     log  ${headers}
 
-    ${response} =  DELETE On Session  ${test_session}  ${URL}/templates/${template_id}  headers=${headers}
+    ${response} =  DELETE On Session  ${test_session}  ${URL_${ENVIROMENT}}/templates/${template_id}  headers=${headers}
     Log  ${response}
     Status Should Be  200  ${response}    #Check Status as 200
 
@@ -212,3 +217,33 @@ Delete Template
 
     ${delete_status}  set variable  ${response.json()}[status]
     should be equal as strings  ${delete_status}  True
+
+
+List Configs
+    run keyword and continue on failure  ..List Configs
+
+..List Configs
+    Setup Test Session
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
+    log  ${headers}
+
+    ${response} =  GET On Session  ${test_session}  ${URL_${ENVIROMENT}}/configurations  headers=${headers}
+    Log  ${response}
+    Status Should Be  200  ${response}
+
+
+Create Site (From Template) - Private
+    run keyword and continue on failure  ..Create Site (From Template) - Private
+
+..Create Site (From Template) - Private
+    create template
+    &{headers}=  Create Dictionary  Authorization=${TOKEN_BEARER_${ENVIROMENT}}
+    log  ${headers}
+
+    &{data} =  Create dictionary  template_slug=${template_name}  site_name=mysite  is_reserved=false
+    ${response} =  POST On Session  ${test_session}  ${URL_${ENVIROMENT}}/sites/template  headers=${headers}  json=${data}
+    log  ${response}
+
+    status should be  200
+    should be equal as strings  ${response.reason}  OK
+
